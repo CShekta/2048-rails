@@ -1,1 +1,7 @@
-<%= render file: "public/game.html" %>
+<h1>Welcome!</h1>
+
+<div class="login">
+  <%= link_to '/auth/github', class: 'btn btn-success' do %>
+    <span class='fa fa-github'></span> Sign in with github
+    <% end %>
+</div>
