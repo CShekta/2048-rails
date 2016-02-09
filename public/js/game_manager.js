@@ -22,8 +22,9 @@ GameManager.prototype.restart = function () {
 };
 
 GameManager.prototype.save = function () {
-  var data = this.getGameState();
-  var url = "/save_game";
+  console.log(this.storageManager.getGameState());
+  var data = this.storageManager.getGameState();
+  var url = "/save_game/";
   $.ajax(url, {
     type: "POST",
     data: data,
