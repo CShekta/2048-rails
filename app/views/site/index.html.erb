@@ -10,5 +10,5 @@
 <% if @current_user %>
   <h2>Hi, <%= @current_user.username %>, ready to play?</h2>
 
-  <%= link_to "New Game", game_path, class:"btn btn-default" %>
+  <%= link_to "New Game", play_game_path(@current_user.id), class:"btn btn-default" %>
 <% end %>
