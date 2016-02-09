@@ -1,3 +1,5 @@
+require 'pry'
+
 class SiteController < ApplicationController
   def game
     #the chosen by user in the system
@@ -7,10 +9,8 @@ class SiteController < ApplicationController
   end
 
   def save_game
-    game = Game.create(
-      state = params(:state)
-    )
-
+    game = params[:data]
+    binding.pry
   end
 
   def index

@@ -7,6 +7,6 @@ Rails.application.routes.draw do
 
   get "user/:id/game", to: "site#game", as: :play_game
 
-  post "/api", to: "site#save_game"
+  post "/save_game", to: "site#save_game"
 
 end
