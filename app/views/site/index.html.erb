@@ -1,7 +1,14 @@
+<% if !@current_user %>
 <h1>Welcome!</h1>
+  <div class="login">
+    <%= link_to '/auth/github/', class: 'btn btn-success' do %>
+      <span class='fa fa-github'></span> Sign in with github
+      <% end %>
+  </div>
+<% end %>
 
-<div class="login">
-  <%= link_to '/auth/github/', class: 'btn btn-success' do %>
-    <span class='fa fa-github'></span> Sign in with github
-    <% end %>
-</div>
+<% if @current_user %>
+  <h2>Hi, <%= @current_user.username %>, ready to play?</h2>
+
+  <%= link_to "New Game", game_path, class:"btn btn-default" %>
+<% end %>
