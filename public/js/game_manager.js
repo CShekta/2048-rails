@@ -37,13 +37,16 @@ GameManager.prototype.save = function () {
 GameManager.prototype.loadGame = function () {
   console.log("hit this function");
   var self = this;
-  var url = '/load_game/8';
-  $.ajax(url, {
-  })
-    .done(function(data) {
+  var url = '/play_game/8';
+  $.ajax({
+    url: url,
+    type: "GET",
+    success: function(data) {
+      console.log(url);
       console.log(data);
       self.setup(data);
-    });
+    },
+  });
 };
 
 // Keep playing after winning (allows going over 2048)

@@ -10,7 +10,7 @@
 <% if @current_user %>
   <h2>Hi, <%= @current_user.username %>, ready to play?</h2>
 
-  <%= link_to "New Game", play_game_path(@current_user.id), class:"btn btn-default" %>
+  <%= link_to "New Game", game_path, class:"btn btn-default" %>
 
 <div class="container">
   <h3>Or Continue a Saved Game</h3>
@@ -29,8 +29,5 @@
     <% end %>
 
   </table>
-  <a class="keep-playing-button">Keep going</a>
-  <a class="retry-button">Try again</a>
-  <a class="save-button">Save Game</a>
 </div>
 <% end %>
