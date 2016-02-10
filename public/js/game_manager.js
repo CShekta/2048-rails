@@ -9,6 +9,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("save", this.save.bind(this));
+  this.inputManager.on("loadGame", this.loadGame.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 
   this.setup();
@@ -34,6 +35,7 @@ GameManager.prototype.save = function () {
 };
 
 GameManager.prototype.loadGame = function () {
+  console.log("hit this function");
   var self = this;
   var url = '/load_game/8';
   $.ajax(url, {
