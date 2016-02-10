@@ -22,8 +22,12 @@ skip_before_action :verify_authenticity_token
     render :json => [], :status => 204
   end
 
-  def index
-    #find all the games associated with the user
+  def load_game
+    game = Game.find(8)
+    render :json => game.json_game
+  end
 
+  def index
+    @games = @current_user.games
   end
 end

@@ -21,6 +21,7 @@ GameManager.prototype.restart = function () {
   this.setup();
 };
 
+// Send data to save in rails api
 GameManager.prototype.save = function () {
   console.log(this.storageManager.getGameState());
   var data = this.storageManager.getGameState();
@@ -29,6 +30,18 @@ GameManager.prototype.save = function () {
     type: "POST",
     data: data,
   });
+  this.storageManager.clearGameState();
+};
+
+GameManager.prototype.loadGame = function () {
+  var self = this;
+  var url = '/load_game/8';
+  $.ajax(url, {
+  })
+    .done(function(data) {
+      console.log(data);
+      self.setup(data);
+    });
 };
 
 // Keep playing after winning (allows going over 2048)
@@ -43,11 +56,11 @@ GameManager.prototype.isGameTerminated = function () {
 };
 
 // Set up the game
-GameManager.prototype.setup = function () {
+GameManager.prototype.setup = function (gameState) {
   var previousState = this.storageManager.getGameState();
 
   // Reload the game from a previous game if present
-  if (previousState) {
+  if (gameState) {
     this.grid        = new Grid(previousState.grid.size,
                                 previousState.grid.cells); // Reload grid
     this.score       = previousState.score;
