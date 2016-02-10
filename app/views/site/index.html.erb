@@ -30,4 +30,11 @@
 
   </table>
 </div>
+<div class="container">
+  <ol>
+  <% @leaders.each do |leader| %>
+  <li>Player: <%= leader.user.email %> Score: <%= leader.score %> </li>
+  <% end %>
+  </ol>
+</div>
 <% end %>

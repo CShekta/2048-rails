@@ -23,6 +23,9 @@ skip_before_action :verify_authenticity_token
   end
 
   def index
-    @games = @current_user.games
+    if @current_user
+      @games = @current_user.games
+      @leaders = Game.order(score: :desc).limit(5)
+    end
   end
 end
