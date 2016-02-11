@@ -5,12 +5,16 @@ skip_before_action :verify_authenticity_token
   def game; end
 
   def save_game
-    game = Game.new(
+    game = Game.create(
     user_id: @current_user.id,
     json_game: params["data"],
     score: JSON.parse(params["data"])["score"],
     won: JSON.parse(params["data"])["won"]
     )
+    if @current_user.best_score < JSON.parse(params["data"])["score"].to_i
+      @current_user.best_score = params["score"].to_i
+      @current_user.save
+    end
     if game.save
       flash[:success] = "You've saved your game!"
       render :json => [], :status => 204
@@ -20,9 +24,9 @@ skip_before_action :verify_authenticity_token
   end
 
   def load_game
-    game = Game.find(11)
+    game = Game.find(1)
     game = game.json_game
-    render :json => game.as_json(except: [:created_at, :updated_at]), :status => :ok
+    render :json => game, :status => :ok
   end
 
   def index

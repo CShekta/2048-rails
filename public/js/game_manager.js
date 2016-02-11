@@ -34,21 +34,14 @@ GameManager.prototype.save = function () {
 };
 
 GameManager.prototype.loadGame = function () {
-  console.log("hit this function");
+  console.log("hit loadGame function");
   var self = this;
-  var url = '/play_game/11';
-  $.ajax({
-    url: url,
-    type: "GET",
-    success: function(data) {
-      console.log(url);
+  var url = '/play_game/1';
+  $.get(url)
+    .done(function(data) {
       console.log(data);
       self.setup(data);
-    },
-    failure: function() {
-      console.log("shit!");
-    }
-  });
+    });
 };
 
 // Keep playing after winning (allows going over 2048)
@@ -65,9 +58,15 @@ GameManager.prototype.isGameTerminated = function () {
 // Set up the game
 GameManager.prototype.setup = function (gameState) {
   var previousState = this.storageManager.getGameState();
-
   // Reload the game from a previous game if present
   if (gameState) {
+    this.grid        = new Grid(gameState.grid.size,
+                                gameState.grid.cells); // Reload grid
+    this.score       = gameState.score;
+    this.over        = gameState.over;
+    this.won         = gameState.won;
+    this.keepPlaying = gameState.keepPlaying;
+  } else if (previousState) {
     this.grid        = new Grid(previousState.grid.size,
                                 previousState.grid.cells); // Reload grid
     this.score       = previousState.score;
