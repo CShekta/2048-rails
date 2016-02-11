@@ -34,12 +34,10 @@ GameManager.prototype.save = function () {
 };
 
 GameManager.prototype.loadGame = function () {
-  console.log("hit loadGame function");
   var self = this;
-  var url = '/play_game/1';
+  var url = '/play_game/' + gId;
   $.get(url)
     .done(function(data) {
-      console.log(data);
       self.setup(data);
     });
 };

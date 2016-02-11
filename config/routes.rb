@@ -9,6 +9,6 @@ Rails.application.routes.draw do
 
   post "/save_game", to: "site#save_game"
 
-  get "/play_game/1", to: "site#load_game"
+  get "/play_game/:id", to: "site#load_game"
 
 end

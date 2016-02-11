@@ -24,7 +24,7 @@ skip_before_action :verify_authenticity_token
   end
 
   def load_game
-    game = Game.find(1)
+    game = Game.find(params[:id])
     game = game.json_game
     render :json => game, :status => :ok
   end
