@@ -9,7 +9,6 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("save", this.save.bind(this));
-  this.inputManager.on("loadGame", this.loadGame.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 
   this.setup();
@@ -34,13 +33,29 @@ GameManager.prototype.save = function () {
   this.storageManager.clearGameState();
 };
 
-GameManager.prototype.loadGame = function (gId) {
-  var self = this;
-  var url = '/play_game/' + gId;
-  $.get(url)
-    .done(function(data) {
-      self.setup(data);
-    });
+GameManager.prototype.loader = function(gameState) {
+  var previousState = gameState;
+  // Reload the game from a previous game if present
+  if (previousState) {
+    this.grid        = new Grid(previousState.grid.size,
+                                previousState.grid.cells); // Reload grid
+    this.score       = previousState.score;
+    this.over        = previousState.over;
+    this.won         = previousState.won;
+    this.keepPlaying = previousState.keepPlaying;
+  } else {
+    this.grid        = new Grid(this.size);
+    this.score       = 0;
+    this.over        = false;
+    this.won         = false;
+    this.keepPlaying = false;
+
+    // Add the initial tiles
+    this.addStartTiles();
+  }
+
+  // Update the actuator
+  this.actuate();
 };
 
 // Keep playing after winning (allows going over 2048)
@@ -55,17 +70,10 @@ GameManager.prototype.isGameTerminated = function () {
 };
 
 // Set up the game
-GameManager.prototype.setup = function (gameState) {
+GameManager.prototype.setup = function () {
   var previousState = this.storageManager.getGameState();
   // Reload the game from a previous game if present
-  if (gameState) {
-    this.grid        = new Grid(gameState.grid.size,
-                                gameState.grid.cells); // Reload grid
-    this.score       = gameState.score;
-    this.over        = gameState.over;
-    this.won         = gameState.won;
-    this.keepPlaying = gameState.keepPlaying;
-  } else if (previousState) {
+  if (previousState) {
     this.grid        = new Grid(previousState.grid.size,
                                 previousState.grid.cells); // Reload grid
     this.score       = previousState.score;

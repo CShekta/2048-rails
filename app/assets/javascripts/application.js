@@ -17,15 +17,8 @@
 $(document).on('ready', function() {
   $('.load-game-button').click(function() {
     var gId = $(this).attr("data-val");
-    var url = "http://localhost:3000/play_game/" + gId;
-    console.log(gId);
-    console.log(url);
 
-    $.getScript("/public/js/game_manager.js", function() {
-      GameManager.prototype.loadGame(gId);
-    });
-
-    // window.location.href = 'http://localhost:3000/play_game/' + gId;
+    window.location.href = 'http://localhost:3000/game/?gid=' + gId;
 
   });
 });
