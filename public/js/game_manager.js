@@ -24,12 +24,11 @@ GameManager.prototype.restart = function () {
 
 // Send data to save in rails api
 GameManager.prototype.save = function () {
-  console.log(this.storageManager.getGameState());
   var data = this.storageManager.getGameState();
   var url = "/save_game/";
-  $.ajax(url, {
-    type: "POST",
-    data: data,
+  $.post(url,
+    {
+    data: JSON.stringify(data),
   });
   this.storageManager.clearGameState();
 };
@@ -37,7 +36,7 @@ GameManager.prototype.save = function () {
 GameManager.prototype.loadGame = function () {
   console.log("hit this function");
   var self = this;
-  var url = '/play_game/8';
+  var url = '/play_game/11';
   $.ajax({
     url: url,
     type: "GET",
@@ -46,6 +45,9 @@ GameManager.prototype.loadGame = function () {
       console.log(data);
       self.setup(data);
     },
+    failure: function() {
+      console.log("shit!");
+    }
   });
 };
 

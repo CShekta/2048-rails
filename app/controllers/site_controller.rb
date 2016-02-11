@@ -5,21 +5,24 @@ skip_before_action :verify_authenticity_token
   def game; end
 
   def save_game
-    Game.create(
+    game = Game.new(
     user_id: @current_user.id,
-    json_game: params,
-    score: params["score"],
-    won: params["won"]
+    json_game: params["data"],
+    score: JSON.parse(params["data"])["score"],
+    won: JSON.parse(params["data"])["won"]
     )
-    flash[:success] = "You've saved your game!"
-    # binding.pry
-    render :json => [], :status => 204
+    if game.save
+      flash[:success] = "You've saved your game!"
+      render :json => [], :status => 204
+    else
+      render :json => [], :status => :no_content
+    end
   end
 
   def load_game
-    game = Game.find(8)
+    game = Game.find(11)
     game = game.json_game
-    render :json => game
+    render :json => game.as_json(except: [:created_at, :updated_at]), :status => :ok
   end
 
   def index
