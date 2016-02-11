@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20160211054915) do
     t.string   "provider"
     t.string   "email"
     t.string   "avatar_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "best_score"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "best_score", default: 0, null: false
   end
 
 end

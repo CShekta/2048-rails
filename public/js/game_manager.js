@@ -25,6 +25,7 @@ GameManager.prototype.restart = function () {
 // Send data to save in rails api
 GameManager.prototype.save = function () {
   var data = this.storageManager.getGameState();
+  console.log(this);
   var url = "/save_game/";
   $.post(url,
     {
@@ -33,7 +34,7 @@ GameManager.prototype.save = function () {
   this.storageManager.clearGameState();
 };
 
-GameManager.prototype.loadGame = function () {
+GameManager.prototype.loadGame = function (gId) {
   var self = this;
   var url = '/play_game/' + gId;
   $.get(url)

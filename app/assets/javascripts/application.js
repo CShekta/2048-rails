@@ -21,7 +21,11 @@ $(document).on('ready', function() {
     console.log(gId);
     console.log(url);
 
-    window.location.href = 'http://localhost:3000/play_game/' + gId;
+    $.getScript("/public/js/game_manager.js", function() {
+      GameManager.prototype.loadGame(gId);
+    });
+
+    // window.location.href = 'http://localhost:3000/play_game/' + gId;
 
   });
 });
