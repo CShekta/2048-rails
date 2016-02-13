@@ -15,4 +15,39 @@
  */
 
 // @import "font-awesome-sprockets.css";
+@import url(https://fonts.googleapis.com/css?family=Anton);
+
 @import "font-awesome.css";
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500);
+
+
+.right-links {
+  margin-right: 20px;
+  font-family: Anton;
+  font-size: 30px;
+  vertical-align: middle;
+}
+
+.main-content {
+  font-family: Ubuntu;
+}
+
+.tables {
+  margin-top: 50px;
+}
+
+a.navbar-brand.home {
+  font-family: Anton;
+  font-size: 30px;
+  vertical-align: middle;
+}
+
+.welcome-message {
+  font-family: Ubuntu;
+  text-align: center;
+  margin: auto;
+}
+
+.new-game {
+  margin: 30px;
+}

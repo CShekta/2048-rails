@@ -1,19 +1,17 @@
-<div id="nav">
-  <nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar">
+  <div class="container-fluid">
     <div class="navbar-header">
-      <%= link_to "Game Center", root_path, class:"navbar-brand" %>
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <%= link_to "Game Center", root_path, class:"navbar-brand home" %>
     </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to "My Games", game_path %></li>
-      <li><%= link_to "Log Out", logout_path, method: :delete %></li>
-    </ul>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to " Logout", logout_path, method: :delete, class:"glyphicon glyphicon-log-in" %></li>
+      </ul>
     </div>
-  </nav>
-</div>
+  </div>
+</nav>

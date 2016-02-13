@@ -8,33 +8,55 @@
 <% end %>
 
 <% if @current_user %>
-  <h2>Hi, <%= @current_user.username %>, ready to play?</h2>
+  <div class="container welcome-message">
+      <% if @current_user.username %>
+        <h2>Hi, <%= @current_user.username %>, ready to play?</h2>
+      <% else %>
+        <h2>Ready to play?</h2>
+      <% end %>
 
-  <%= link_to "New Game", game_path, class:"btn btn-success" %>
+    <%= link_to "New Game", game_path, class:"btn btn-success new-game" %>
 
-<div class="container">
-  <h3>Or Continue a Saved Game</h3>
-  <table class="table table-hover">
-    <tr>
-      <th>Score</th>
-      <th>Last Played</th>
-      <th>Continue</th>
-    </tr>
-    <% @games.each do |game| %>
-    <tr>
-      <td><%= game.score %></td>
-      <td><%= game.updated_at %></td>
-      <td><a class="btn btn-default load-game-button" data-val=<%= game.id %>>Continue Game</a></td>
-    </tr>
-    <% end %>
+  </div>
 
-  </table>
-</div>
-<div class="container">
-  <ol>
-  <% @leaders.each do |leader| %>
-  <li>Player: <%= leader.user.email %> Score: <%= leader.score %> </li>
-  <% end %>
-  </ol>
-</div>
+  <div class="tables">
+    <div class="col-md-9 container">
+      <h3>Saved Games</h3>
+      <table class="col-md-9 table table-hover">
+        <tr>
+          <th>Score</th>
+          <th>Last Played</th>
+          <th>Continue</th>
+        </tr>
+        <% @games.each do |game| %>
+        <tr>
+          <td><%= game.score %></td>
+          <td><%= game.updated_at.to_date %></td>
+          <td><a class="btn btn-warning load-game-button" data-val=<%= game.id %>>Continue Game</a></td>
+        </tr>
+        <% end %>
+
+      </table>
+    </div>
+
+    <div class="col-md-3">
+      <h3>LeaderBoard</h3>
+      <table class="col-md-3 table table-bordered">
+        <tr>
+          <th>Player</th>
+          <th>Score</th>
+        </tr>
+        <% @leaders.each do |leader| %>
+        <tr>
+          <td><%= leader.user.email %></td>
+          <td><%= leader.score %></td>
+        </tr>
+        <% end %>
+    </div>
+  </div>
+
+
+
+
+
 <% end %>
