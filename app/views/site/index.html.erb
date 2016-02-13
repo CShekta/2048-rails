@@ -10,9 +10,9 @@
 <% if @current_user %>
   <div class="container welcome-message">
       <% if @current_user.username %>
-        <h2>Hi, <%= @current_user.username %>, ready to play?</h2>
+        <h2 class="intro">Hi, <%= @current_user.username %>, ready to play?</h2>
       <% else %>
-        <h2>Ready to play?</h2>
+        <h2 class="intro">Ready to play?</h2>
       <% end %>
 
     <%= link_to "New Game", game_path, class:"btn btn-success new-game" %>
